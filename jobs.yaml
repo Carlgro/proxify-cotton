@@ -1,0 +1,45 @@
+author_email: guerreroaguilar182@gmail.com
+author_name: Carlos G.
+schema_name: analytics
+jobs:
+  users:
+    url: https://jsonplaceholder.typicode.com/users
+    cron_schedule: "0 0 * * *"
+    # Pending to implement
+  posts:
+    url: https://jsonplaceholder.typicode.com/posts
+    table_name: posts
+    cron_schedule: "0 1 * * *"
+    queries:
+      - desc: Show total amount of post per user_id
+        sql: >+
+          SELECT userId, count(1) number_posts
+          FROM {table_name}
+          GROUP BY userId
+        columns:
+          column-1:
+            name: 'user_id'
+          column-2:
+            name: 'number_posts'
+      - desc: Show user_id with longest posts (body length)
+        sql: >+
+          SELECT userId, length(title) title_length, length(body) body_length
+          FROM {table_name}
+          ORDER BY length(body) DESC
+          LIMIT 1
+        columns:
+          column-1:
+            name: 'user_id'
+          column-2:
+            name: 'title_length'
+          column-3:
+            name: 'body_length'
+      - desc: Show user_id with last post
+        sql: >+
+          SELECT userId
+          FROM {table_name}
+          ORDER BY id DESC
+          LIMIT 1
+        columns:
+          column-1:
+            name: 'user_id'
