@@ -22,3 +22,6 @@
 1. Number of posts per user.
 2. User with le longest post. 
 3. User with the latest post (based on post_id). 
+
+##### WIP:
+1. Users post its a WIP but will follow the same logic of posts. 
